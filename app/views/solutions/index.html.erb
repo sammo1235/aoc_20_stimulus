@@ -1,3 +1,13 @@
-<div data-controller="hello">
-  <h1 data-target="hello.output"></h1>
+<div class="flex flex-col mt-16 align-center" data-controller="day-one">
+  <h1 class="text-lg text-gray-900">Day One</h1>
+
+  <input class="mt-8" type="file" data-day-one-target="dayOneFile">
+  <div class="flex flex-row mt-8 items-center">
+    <button class="btn p-4 bg-green-500 rounded" data-action="click->day-one#partOneSolve" data-day-one-target="partOneSolve">Solve Part One</button>
+    <div class="ml-8 text-green-500" data-day-one-target="partOneSolution"></div>
+  </div>
+  <div class="flex flex-row mt-8 items-center">
+    <button class="btn p-4 bg-green-500 rounded" data-action="click->day-one#partTwoSolve" data-day-one-target="partTwoSolve">Solve Part Two</button>
+    <div class="ml-8 text-green-500" data-day-one-target="partTwoSolution"></div>
+  </div>
 </div>

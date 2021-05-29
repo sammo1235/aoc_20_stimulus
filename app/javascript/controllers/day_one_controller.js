@@ -2,7 +2,7 @@ import { Controller } from "stimulus"
 
 export default class extends Controller {
   static targets = [
-    "dayOneFile",
+    "file",
     "partOneSolution",
     "partOneSolve",
     "partTwoSolution",
@@ -10,7 +10,7 @@ export default class extends Controller {
   ]
 
   partOneSolve() {
-    var input = this.dayOneFileTarget;
+    var input = this.fileTarget;
     var output = this.partOneSolutionTarget;
 
     if (input.files && input.files[0]) {
@@ -41,7 +41,7 @@ export default class extends Controller {
   }
 
   partTwoSolve() {
-    var input = this.dayOneFileTarget;
+    var input = this.fileTarget;
     var output = this.partTwoSolutionTarget;
 
     if (input.files && input.files[0]) {

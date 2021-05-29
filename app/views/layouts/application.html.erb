@@ -11,7 +11,10 @@
     <%= stylesheet_pack_tag "application", "data-turbo-track": "reload" %>
   </head>
 
-  <body class="flex justify-center">
-    <%= yield %>
+  <body>
+    <div class="text-xl text-gray-900 justify-center flex mt-12">Advent of Code 2020 JS Solutions</div>
+    <div class="flex flex-wrap">
+      <%= yield %>
+    </div>
   </body>
 </html>

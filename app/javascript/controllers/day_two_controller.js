@@ -18,19 +18,29 @@ export default class extends Controller {
       var myFile = input.files[0];
       var reader = new FileReader();
       reader.onload = function() {
-        var data = reader.result.split("\n").map(function(item) { 
-          return Number(item);
-        });
+        var data = reader.result.split("\n");
 
-        var result;
+        var result = 0;
         for(var i=0; i < data.length; i++) {
-          if(data.includes(2020 - data[i])) {
-            result = data[i] * (2020 - data[i]);
+          var rule = data[i].split(":")[0];
+          var letter = rule.split(" ")[1];
+          var low = Number(rule.split(" ")[0].split("-")[0]);
+          var high = Number(rule.split(" ")[0].split("-")[1]);
+          var password = data[i].split(": ")[1].trim().split('');
+
+          var letterCount = 0;
+          for(var j=0; j < password.length; j++) {
+            if(password[j] == letter) {
+              letterCount++;
+            }
           }
+          if(letterCount <= high && letterCount >= low) {
+            result++;
+          } 
         }
 
         if(result === null) {
-          result = "Not found";
+          result = "None found";
         }
 
         output.innerHTML = result;
@@ -51,19 +61,10 @@ export default class extends Controller {
       var myFile = input.files[0];
       var reader = new FileReader();
       reader.onload = function() {
-        var data = reader.result.split("\n").map(function(item) {
-          return Number(item);
-        });
+        var data = reader.result.split("\n")
 
-        var result;
-        for(var i=0; i < data.length; i++) {
-          for(var j=0; j < data.length; j++) {
-            if(data.includes(2020 - data[i] - data[j])) {
-              result = data[i] * data[j] * (2020 - data[i] - data[j]);
-            }
-          }
-        }
-
+        // todo
+        
         if(result === null) {
           result = "Not found";
         }

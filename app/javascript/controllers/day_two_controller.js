@@ -17,16 +17,14 @@ export default class extends Controller {
       this.partOneSolveTarget.innerHTML = "Computing...";
       var myFile = input.files[0];
       var reader = new FileReader();
+
+      var $this = this;
       reader.onload = function() {
         var data = reader.result.split("\n");
 
         var result = 0;
         for(var i=0; i < data.length; i++) {
-          var rule = data[i].split(":")[0];
-          var letter = rule.split(" ")[1];
-          var low = Number(rule.split(" ")[0].split("-")[0]);
-          var high = Number(rule.split(" ")[0].split("-")[1]);
-          var password = data[i].split(": ")[1].trim().split('');
+          var [letter, high, low, password] = $this.splitOut(data[i]);
 
           var letterCount = 0;
           for(var j=0; j < password.length; j++) {
@@ -60,11 +58,22 @@ export default class extends Controller {
       this.partTwoSolveTarget.innerHTML = "Computing...";
       var myFile = input.files[0];
       var reader = new FileReader();
-      reader.onload = function() {
-        var data = reader.result.split("\n")
 
-        // todo
-        
+      var $this = this;
+      reader.onload = function() {
+        var data = reader.result.split("\n");
+
+        var result = 0;
+        for(var i=0; i < data.length; i++) {
+          var [letter, first, second, password] = $this.splitOut(data[i]);
+
+          if(password[first-1] == letter && password[second-1] != letter) {
+            result++;
+          } else if (password[first-1] != letter && password[second-1] == letter) {
+            result++;
+          }
+        }
+
         if(result === null) {
           result = "Not found";
         }
@@ -76,5 +85,14 @@ export default class extends Controller {
     } else {
       output.innerHTML = "Please add a file";
     }
+  }
+
+  splitOut(data) {
+    var rule = data.split(":")[0];
+    var letter = rule.split(" ")[1];
+    var low = Number(rule.split(" ")[0].split("-")[0]);
+    var high = Number(rule.split(" ")[0].split("-")[1]);
+    var password = data.split(": ")[1].trim().split('');
+    return [letter, high, low, password];
   }
 }
